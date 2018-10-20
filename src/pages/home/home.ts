@@ -22,13 +22,13 @@ export class HomePage {
   };
 
   login() {
-    this.auth.authenticate(this.credencial).subscribe(response => {
-      console.log(response.headers.get("Authorization"));
-    }),
-      error => {
-        console.log(error);
-      };
-    this.navCtrl.setRoot("CategoriasPage");
+    this.auth.authenticate(this.credencial).subscribe(
+      response => {
+        this.auth.successfullLogin(response.headers.get("Authorization"));
+        this.navCtrl.setRoot("CategoriasPage");
+      },
+      error => {}
+    );
   }
 
   ionViewWillEnter() {
