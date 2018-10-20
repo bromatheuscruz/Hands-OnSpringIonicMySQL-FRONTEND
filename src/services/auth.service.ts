@@ -5,9 +5,13 @@ import { CredencialDTO } from "./../models/credencial.dto";
 import { Injectable } from "@angular/core";
 import { StorageService } from "./storage.service";
 
+import { JwtHelper } from "angular2-jwt";
+
 @Injectable()
 export class AuthService {
   constructor(public http: HttpClient, public storage: StorageService) {}
+
+  jwtHelper: JwtHelper = new JwtHelper();
 
   authenticate(credencial: CredencialDTO) {
     return this.http.post(`${API_CONFIG.baseUrl}/login`, credencial, {
@@ -18,14 +22,15 @@ export class AuthService {
 
   successfullLogin(authorizationValue: string) {
     const TAMANHO_BARIER = 7;
-    let token = authorizationValue.substring(TAMANHO_BARIER);
+    let tok = authorizationValue.substring(TAMANHO_BARIER);
     let user: LocalUser = {
-      token: token
+      token: tok,
+      email: this.jwtHelper.decodeToken(tok).sub
     };
     this.storage.setLocalUser(user);
   }
 
-  logout(){
+  logout() {
     this.storage.setLocalUser(null);
   }
 }
