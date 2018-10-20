@@ -33,8 +33,14 @@ export class ProfilePage {
         response => {
           this.cliente = response;
         },
-        error => {console.log(error)}
+        error => {
+          if (error.status == 403) {
+            this.navCtrl.setRoot("HomePage");
+          }
+        }
       );
+    } else {
+      this.navCtrl.setRoot("HomePage");
     }
   }
 }
