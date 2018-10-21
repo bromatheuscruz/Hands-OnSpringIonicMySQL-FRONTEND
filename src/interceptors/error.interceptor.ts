@@ -40,7 +40,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           break;
 
         default:
-          this.handleDefaultError();
+          this.handleDefaultError(errorObj);
           break;
       }
 
@@ -62,8 +62,8 @@ export class ErrorInterceptor implements HttpInterceptor {
     alert.present();
   }
 
-  handleDefaultError(err) {
-    let alert = this.alertController.create({
+    handleDefaultError(err) {
+      let alert = this.alertController.create({
       title: "Erro " + err.status + ": " + err.error,
       message: err.message,
       enableBackdropDismiss: false,

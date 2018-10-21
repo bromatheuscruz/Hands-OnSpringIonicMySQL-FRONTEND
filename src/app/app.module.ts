@@ -1,5 +1,5 @@
 import { AuthInterceptorProvider } from "./../interceptors/auth.interceptor";
-import { ClienteService } from "./../services/cliente.service";
+import { ClienteService } from "../services/domain/cliente.service";
 import { ErrorInterceptorProvider } from "./../interceptors/error.interceptor";
 import { CategoriaService } from "./../services/domain/categoria.service";
 import { BrowserModule } from "@angular/platform-browser";
